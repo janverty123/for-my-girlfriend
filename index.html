@@ -155,13 +155,13 @@ function showSuccessMessage() {
   const messageBox = document.getElementById("message-box");
   let message = "";
 
-  if (successCount === 1) {
+  if (successCount === 0) {
     message = "🎉 You found it, my love! 🎉";
-  } else if (successCount === 2) {
+  } else if (successCount === 1) {
     message = "💚 You really love me, don't you? 💚";
-  } else if (successCount === 3) {
+  } else if (successCount === 2) {
     message = "🌸 You're the cutest person ever! 🌸";
-  } else if (successCount === 4) {
+  } else if (successCount === 3) {
     message = "🌟 You make my world brighter! 🌟";
   } else {
     message = "🌈 Infinite love unlocked! 🌈";

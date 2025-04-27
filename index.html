@@ -16,8 +16,8 @@
       justify-content: center;
       flex-direction: column;
       animation: moveBackground 30s linear infinite;
-      position: relative; /* Important for random hints */
-      overflow: hidden; /* So hints don't scroll weirdly */
+      position: relative;
+      overflow: hidden;
     }
 
     @keyframes moveBackground {
@@ -68,14 +68,12 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       font-size: 14px;
-      animation: fadeInOut 3s forwards;
+      animation: fadeIn 0.5s ease forwards;
     }
 
-    @keyframes fadeInOut {
-      0% { opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
@@ -113,7 +111,7 @@ function shakeLogin() {
   setTimeout(() => loginBox.style.animation = "", 500);
 }
 
-// Create and show a random clue
+// Create and show a random clue (PERMANENT)
 function showRandomClue() {
   const clues = [
     "It’s something sweet you always say. 🍬",
@@ -136,18 +134,15 @@ function showRandomClue() {
   const bodyWidth = body.offsetWidth;
   const bodyHeight = body.offsetHeight;
   
-  const randomX = Math.floor(Math.random() * (bodyWidth - 100)); // leave some margin
-  const randomY = Math.floor(Math.random() * (bodyHeight - 30)); // leave some margin
+  const randomX = Math.floor(Math.random() * (bodyWidth - 120)); // leave some margin
+  const randomY = Math.floor(Math.random() * (bodyHeight - 40)); // leave some margin
   
   clue.style.left = randomX + 'px';
   clue.style.top = randomY + 'px';
   
   document.body.appendChild(clue);
   
-  // Remove the clue after 3 seconds
-  setTimeout(() => {
-    clue.remove();
-  }, 3000);
+  // ⚡ No removal here! Clues stay forever.
 }
 </script>
 

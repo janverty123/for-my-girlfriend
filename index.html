@@ -30,4 +30,52 @@
       padding: 10px;
       border-radius: 10px;
       border: 1px solid #ccc;
-      width:
+      width: 80%;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login" id="login-box">
+  <h2>Enter the Secret Word 💖</h2>
+  <input type="password" id="password" placeholder="Type it here...">
+  <br>
+  <button onclick="checkPassword()">Enter</button>
+</div>
+
+<div class="message hidden" id="message-box">
+  <h1>🎉 You found it! 🎉</h1>
+  <p>This is where your special message will appear!</p>
+</div>
+
+<script>
+function checkPassword() {
+  const correctPassword = "iloveyou"; // Set your password here
+  const userInput = document.getElementById("password").value;
+  
+  if (userInput === correctPassword) {
+    document.getElementById("login-box").classList.add("hidden");
+    document.getElementById("message-box").classList.remove("hidden");
+  } else {
+    alert("Oops! Try again, love. 💖");
+  }
+}
+</script>
+
+</body>
+</html>

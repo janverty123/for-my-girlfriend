@@ -7,7 +7,10 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom right, #ffe0e9, #ffe6f7);
+      background: #a8e6cf;
+      background-image: url('frog.png'); /* Will use your frog image */
+      background-repeat: repeat;
+      background-size: 150px;
       height: 100vh;
       margin: 0;
       display: flex;
@@ -17,7 +20,7 @@
     }
     .login, .message {
       text-align: center;
-      background: white;
+      background: rgba(255, 255, 255, 0.9);
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -31,14 +34,14 @@
     }
     button {
       padding: 10px 20px;
-      background-color: #ff6f91;
+      background-color: #4caf50;
       color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #ff4e73;
+      background-color: #45a049;
     }
     .hidden {
       display: none;

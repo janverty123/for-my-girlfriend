@@ -9,13 +9,15 @@
       font-family: 'Arial', sans-serif;
       background: #a8e6cf url('frog.png') repeat;
       background-size: 150px;
-      min-height: 100vh; /* Changed from height to min-height */
+      min-height: 100vh;
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      animation: moveBackground 30s linear infinite; /* Slower, dreamy animation */
+      animation: moveBackground 30s linear infinite;
+      position: relative; /* Important for random hints */
+      overflow: hidden; /* So hints don't scroll weirdly */
     }
 
     @keyframes moveBackground {
@@ -30,7 +32,7 @@
       border-radius: 20px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       width: 90%;
-      max-width: 350px; /* ✨ Added max-width for nice phone layout */
+      max-width: 350px;
     }
 
     input[type="password"] {
@@ -59,13 +61,21 @@
       display: none;
     }
 
-    /* Cute little shake effect when wrong password */
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
+    .clue {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-size: 14px;
+      animation: fadeInOut 3s forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
     }
   </style>
 </head>
@@ -92,11 +102,52 @@ function checkPassword() {
     document.getElementById("login-box").classList.add("hidden");
     document.getElementById("message-box").classList.remove("hidden");
   } else {
-    const loginBox = document.getElementById("login-box");
-    loginBox.style.animation = "shake 0.5s"; // ✨ Add shake animation
-    setTimeout(() => loginBox.style.animation = "", 500);
-    alert("Oops! Try again, love. 💖");
+    showRandomClue();
+    shakeLogin();
   }
+}
+
+function shakeLogin() {
+  const loginBox = document.getElementById("login-box");
+  loginBox.style.animation = "shake 0.5s";
+  setTimeout(() => loginBox.style.animation = "", 500);
+}
+
+// Create and show a random clue
+function showRandomClue() {
+  const clues = [
+    "It’s something sweet you always say. 🍬",
+    "Three words, eight letters. 💌",
+    "You say it when you're smiling. 🌟",
+    "It starts with 'I'... 👀",
+    "You feel it every day. ❤️",
+    "It's not 'hello'... it's deeper. 💬",
+    "Hint: Feeling you have for someone. 💞"
+  ];
+
+  const clueText = clues[Math.floor(Math.random() * clues.length)];
+  
+  const clue = document.createElement('div');
+  clue.classList.add('clue');
+  clue.textContent = clueText;
+  
+  // Random position
+  const body = document.body;
+  const bodyWidth = body.offsetWidth;
+  const bodyHeight = body.offsetHeight;
+  
+  const randomX = Math.floor(Math.random() * (bodyWidth - 100)); // leave some margin
+  const randomY = Math.floor(Math.random() * (bodyHeight - 30)); // leave some margin
+  
+  clue.style.left = randomX + 'px';
+  clue.style.top = randomY + 'px';
+  
+  document.body.appendChild(clue);
+  
+  // Remove the clue after 3 seconds
+  setTimeout(() => {
+    clue.remove();
+  }, 3000);
 }
 </script>
 

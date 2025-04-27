@@ -3,10 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>For My Girlfriend</title>
+  <title>For You ❤️</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #ffe0e9, #ffe6f7);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .login, .message {
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    input[type="password"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 80%;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff6f91;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff4e73;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, Love ❤️</h1>
-  <p>This is a special surprise for you!</p>
+
+<div class="login" id="login-box">
+  <h2>Enter the Secret Word 💖</h2>
+  <input type="password" id="password" placeholder="Type it here...">
+  <br>
+  <button onclick="checkPassword()">Enter</button>
+</div>
+
+<div class="message hidden" id="message-box">
+  <h1>🎉 You found it! 🎉</h1>
+  <p>This is where your special message will appear!</p>
+</div>
+
+<script>
+function checkPassword() {
+  const correctPassword = "iloveyou"; // <-- set your secret word here
+  const userInput = document.getElementById("password").value;
+  
+  if (userInput === correctPassword) {
+    document.getElementById("login-box").classList.add("hidden");
+    document.getElementById("message-box").classList.remove("hidden");
+  } else {
+    alert("Oops! Try again, love. 💖");
+  }
+}
+</script>
+
 </body>
 </html>

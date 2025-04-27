@@ -61,6 +61,12 @@
       display: none;
     }
 
+    .green-heart {
+      color: #4caf50;
+      font-size: 1.5em;
+      vertical-align: middle;
+    }
+
     .clue {
       position: absolute;
       background: rgba(255, 255, 255, 0.8);
@@ -80,7 +86,7 @@
 <body>
 
 <div class="login" id="login-box">
-  <h2>Enter the Secret Word 💖</h2>
+  <h2>Enter the Secret Word <span class="green-heart">💚</span></h2>
   <input type="password" id="password" placeholder="Type it here...">
   <br>
   <button onclick="checkPassword()">Enter</button>
@@ -92,11 +98,15 @@
 </div>
 
 <script>
+let successCount = 0; // Counter for correct attempts
+
 function checkPassword() {
   const correctPassword = "iloveyou"; // Set your password here
   const userInput = document.getElementById("password").value;
   
   if (userInput === correctPassword) {
+    successCount++;
+    showSuccessMessage();
     document.getElementById("login-box").classList.add("hidden");
     document.getElementById("message-box").classList.remove("hidden");
   } else {
@@ -111,7 +121,6 @@ function shakeLogin() {
   setTimeout(() => loginBox.style.animation = "", 500);
 }
 
-// Create and show a random clue (PERMANENT)
 function showRandomClue() {
   const clues = [
     "It’s something sweet you always say. 🍬",
@@ -129,20 +138,39 @@ function showRandomClue() {
   clue.classList.add('clue');
   clue.textContent = clueText;
   
-  // Random position
   const body = document.body;
   const bodyWidth = body.offsetWidth;
   const bodyHeight = body.offsetHeight;
   
-  const randomX = Math.floor(Math.random() * (bodyWidth - 120)); // leave some margin
-  const randomY = Math.floor(Math.random() * (bodyHeight - 40)); // leave some margin
+  const randomX = Math.floor(Math.random() * (bodyWidth - 120));
+  const randomY = Math.floor(Math.random() * (bodyHeight - 40));
   
   clue.style.left = randomX + 'px';
   clue.style.top = randomY + 'px';
   
   document.body.appendChild(clue);
-  
-  // ⚡ No removal here! Clues stay forever.
+}
+
+function showSuccessMessage() {
+  const messageBox = document.getElementById("message-box");
+  let message = "";
+
+  if (successCount === 1) {
+    message = "🎉 You found it, my love! 🎉";
+  } else if (successCount === 2) {
+    message = "💚 You really love me, don't you? 💚";
+  } else if (successCount === 3) {
+    message = "🌸 You're the cutest person ever! 🌸";
+  } else if (successCount === 4) {
+    message = "🌟 You make my world brighter! 🌟";
+  } else {
+    message = "🌈 Infinite love unlocked! 🌈";
+  }
+
+  messageBox.innerHTML = `
+    <h1>${message}</h1>
+    <p>This is your special space! 💖</p>
+  `;
 }
 </script>
 

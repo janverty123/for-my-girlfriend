@@ -7,18 +7,23 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #a8e6cf;
-      background-image: url('frog.png');
-      background-repeat: repeat;
+      background: #a8e6cf url('frog.png') repeat;
       background-size: 150px;
-      background-position: top left, center center; /* Brick pattern */
       height: 100vh;
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      animation: moveBackground 10s linear infinite;
     }
+
+    @keyframes moveBackground {
+      0% { background-position: 0px 0px; }
+      50% { background-position: 50px 50px; }
+      100% { background-position: 0px 0px; }
+    }
+
     .login, .message {
       text-align: center;
       background: rgba(255, 255, 255, 0.9);

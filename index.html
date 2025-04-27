@@ -9,19 +9,18 @@
       font-family: 'Arial', sans-serif;
       background: #a8e6cf url('frog.png') repeat;
       background-size: 150px;
-      height: 100vh;
+      min-height: 100vh; /* Changed from height to min-height */
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      animation: moveBackground 10s linear infinite;
+      animation: moveBackground 30s linear infinite; /* Slower, dreamy animation */
     }
 
     @keyframes moveBackground {
-      0% { background-position: 0px 0px; }
-      50% { background-position: 50px 50px; }
-      100% { background-position: 0px 0px; }
+      0% { background-position: 0 0; }
+      100% { background-position: 300px 300px; }
     }
 
     .login, .message {
@@ -30,7 +29,10 @@
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 350px; /* ✨ Added max-width for nice phone layout */
     }
+
     input[type="password"] {
       padding: 10px;
       border-radius: 10px;
@@ -38,6 +40,7 @@
       width: 80%;
       margin-bottom: 15px;
     }
+
     button {
       padding: 10px 20px;
       background-color: #4caf50;
@@ -45,12 +48,24 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
       background-color: #45a049;
     }
+
     .hidden {
       display: none;
+    }
+
+    /* Cute little shake effect when wrong password */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
     }
   </style>
 </head>
@@ -77,6 +92,9 @@ function checkPassword() {
     document.getElementById("login-box").classList.add("hidden");
     document.getElementById("message-box").classList.remove("hidden");
   } else {
+    const loginBox = document.getElementById("login-box");
+    loginBox.style.animation = "shake 0.5s"; // ✨ Add shake animation
+    setTimeout(() => loginBox.style.animation = "", 500);
     alert("Oops! Try again, love. 💖");
   }
 }
